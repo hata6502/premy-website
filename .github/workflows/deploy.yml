@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: 0 0 * * *
 concurrency: deploy
 permissions:
   pages: write
@@ -20,6 +22,7 @@ jobs:
         with:
           node-version: 18
 
+      - run: curl https://scrapbox.io/api/pages/hata6502/premy%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E9%9B%86 -o public/examples.json
       - run: npm ci
       - run: npm run build
 

@@ -1,0 +1,17 @@
+{
+  "lang": "en-US",
+  "name": "premy",
+  "short_name": "premy",
+  "description": "A drawing app for anyone. ",
+  "start_url": ".",
+  "display": "fullscreen",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    }
+  ]
+}
