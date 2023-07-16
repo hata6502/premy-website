@@ -2,7 +2,8 @@ import {
   ArrowDownTrayIcon,
   DocumentTextIcon,
 } from "@heroicons/react/24/outline";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
+import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
   {
@@ -28,7 +29,9 @@ const faqs = [
 ];
 
 let examples: { title: string; image?: string }[] | undefined;
-export const App: FunctionComponent = () => {
+export const App: FunctionComponent<{
+  premyDB?: IDBDatabase;
+}> = ({ premyDB }) => {
   if (!examples) {
     throw (async () => {
       const examplesResponse = await fetch("examples.json");
@@ -42,7 +45,16 @@ export const App: FunctionComponent = () => {
     })();
   }
 
+  const [isPremyDialogOpen, setIsPremyDialogOpen] = useState(false);
   const isAppInstalled = !matchMedia("(display-mode: browser)").matches;
+
+  const handleOpenCanvasButtonClick = () => {
+    setIsPremyDialogOpen(true);
+  };
+
+  const handlePremyDialogClose = () => {
+    setIsPremyDialogOpen(false);
+  };
 
   return (
     <>
@@ -60,7 +72,8 @@ export const App: FunctionComponent = () => {
           <div className="mt-10 flex items-center gap-x-6">
             {!isAppInstalled && (
               <a
-                href="#"
+                href="https://help.hata6502.com/--61818b0489e586002278f64c"
+                target="_blank"
                 className="inline-flex items-center gap-x-2 text-sm font-semibold leading-6 text-gray-900"
               >
                 Install app
@@ -68,12 +81,13 @@ export const App: FunctionComponent = () => {
               </a>
             )}
 
-            <a
-              href="#"
+            <button
+              type="button"
+              onClick={handleOpenCanvasButtonClick}
               className="rounded-md bg-neutral-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
             >
               Open canvas
-            </a>
+            </button>
           </div>
         </div>
 
@@ -145,103 +159,11 @@ export const App: FunctionComponent = () => {
         </footer>
       </div>
 
-      <premy-dialog />
+      <PremyDialog
+        open={isPremyDialogOpen}
+        premyDB={premyDB}
+        onClose={handlePremyDialogClose}
+      />
     </>
   );
 };
-
-/*
-<script type="module">
-  const dialog = document.querySelector("#dialog");
-  const openButton = document.querySelector("#open-button");
-  dialog.addEventListener("premyClose", () => {
-    dialog.removeAttribute("open");
-  });
-
-  const premyDBOpenRequest = indexedDB.open("premy", 2);
-
-  premyDBOpenRequest.onsuccess = () => {
-    const premyDB = premyDBOpenRequest.result;
-
-    openButton.addEventListener("click", async () => {
-      const transaction = premyDB.transaction(["history"], "readonly");
-      const historyStore = transaction.objectStore("history");
-      const historyGetAllRequest = historyStore.getAll();
-      await new Promise((resolve, reject) => {
-        historyGetAllRequest.onsuccess = resolve;
-        historyGetAllRequest.onerror = reject;
-      });
-      const history = historyGetAllRequest.result;
-      dialog.setHistory(history);
-      dialog.setAttribute("open", "");
-    });
-
-    dialog.addEventListener("premyHistoryChange", async (event) => {
-      const { historyMaxLength, pushed } = event.detail;
-
-      const transaction = premyDB.transaction(["history"], "readwrite");
-      const historyStore = transaction.objectStore("history");
-      for (const dataURL of pushed) {
-        historyStore.add(dataURL);
-      }
-
-      const historyGetAllKeysRequest = historyStore.getAllKeys();
-      await new Promise((resolve, reject) => {
-        historyGetAllKeysRequest.onsuccess = resolve;
-        historyGetAllKeysRequest.onerror = reject;
-      });
-      const historyKeys = historyGetAllKeysRequest.result;
-      const removedHistoryKeys = historyKeys.slice(
-        0,
-        Math.max(historyKeys.length - historyMaxLength, 0)
-      );
-      for (const historyKey of removedHistoryKeys) {
-        historyStore.delete(historyKey);
-      }
-    });
-  };
-
-  premyDBOpenRequest.onerror = () => {
-    openButton.addEventListener("click", () => {
-      dialog.setAttribute("open", "");
-    });
-  };
-
-  premyDBOpenRequest.onupgradeneeded = async (event) => {
-    const premyDB = premyDBOpenRequest.result;
-    const transaction = premyDBOpenRequest.transaction;
-    let version = event.oldVersion;
-
-    if (version === 0) {
-      const etcStore = premyDB.createObjectStore("etc");
-      const image = localStorage.getItem("premy-image");
-      if (image) {
-        etcStore.put([image], "history");
-      }
-      localStorage.removeItem("premy-image");
-      version++;
-    }
-
-    if (version === 1) {
-      const etcStore = transaction.objectStore("etc");
-      const historyGetRequest = etcStore.get("history");
-      await new Promise((resolve, reject) => {
-        historyGetRequest.onsuccess = resolve;
-        historyGetRequest.onerror = reject;
-      });
-      const history = historyGetRequest.result ?? [];
-
-      const historyStore = premyDB.createObjectStore("history", {
-        autoIncrement: true,
-      });
-      for (const dataURL of history) {
-        historyStore.add(dataURL);
-      }
-
-      premyDB.deleteObjectStore("etc");
-      version++;
-    }
-  };
-</script>
-
- */
