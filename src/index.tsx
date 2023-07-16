@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { App } from "./App";
 
 if ("serviceWorker" in navigator) {
-  await navigator.serviceWorker.register("./dist/serviceWorker.js", {
+  await navigator.serviceWorker.register("./serviceWorker.js", {
     type: "module",
   });
 }

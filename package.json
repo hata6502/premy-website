@@ -15,7 +15,7 @@
     "build": "npm run build:css && npm run build:app && npm run build:service-worker",
     "build:css": "npx tailwindcss -i src/index.css -o public/dist/index.css --minify",
     "build:app": "esbuild src/index.tsx --bundle --format=esm --minify --outfile=public/dist/index.js",
-    "build:service-worker": "esbuild src/serviceWorker.ts --bundle --format=esm --minify --define:CACHE_NAME=\\\"$(date +%s)\\\" --outfile=public/dist/serviceWorker.js",
+    "build:service-worker": "esbuild src/serviceWorker.ts --bundle --format=esm --minify --define:CACHE_NAME=\\\"$(date +%s)\\\" --outfile=public/serviceWorker.js",
     "start": "http-server -c-1 public",
     "test": "tsc --noEmit"
   },
