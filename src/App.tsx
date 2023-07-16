@@ -7,8 +7,8 @@ import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
   {
-    title: "絵文字ラフスケッチ",
-    url: "https://help.hata6502.com/--64b30dde8803b90021bd68c2",
+    title: "A drawing app for anyone",
+    url: "https://help.hata6502.com/--62645189218beb0020cfe38d",
   },
   {
     title: "画面分割でお題を見ながらお絵かきする",
@@ -19,12 +19,12 @@ const faqs = [
     url: "https://help.hata6502.com/--63a6d744e87e17001d2de628",
   },
   {
-    title: "お絵かきをScrapboxで公開しよう",
-    url: "https://help.hata6502.com/--63a6d7b54f80c3001d3a6981",
-  },
-  {
     title: "premy免責事項",
     url: "https://help.hata6502.com/--61818b0489e586002278f634",
+  },
+  {
+    title: "お絵かきをScrapboxで公開しよう",
+    url: "https://help.hata6502.com/--63a6d7b54f80c3001d3a6981",
   },
 ];
 
