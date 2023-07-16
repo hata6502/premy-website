@@ -10,9 +10,10 @@
       http-equiv="Content-Security-Policy"
       content="
         default-src 'self';
+        connect-src 'self' https://www.google-analytics.com;
         font-src 'self' https://fonts.gstatic.com;
         img-src * data:;
-        script-src 'self' 'sha256-mDatUazzuM6LWu8dpVZRj/EOxc8pPhDpFJg7bCUtcuM=';
+        script-src-elem 'self' https://www.googletagmanager.com 'sha256-mDatUazzuM6LWu8dpVZRj/EOxc8pPhDpFJg7bCUtcuM=';
         style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com;
       "
     />
