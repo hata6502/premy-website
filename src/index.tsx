@@ -1,3 +1,5 @@
+import "./gtag";
+
 import "premy";
 import { FunctionComponent, StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
