@@ -1,21 +1,20 @@
 window.dataLayer = window.dataLayer || [];
-
-function gtag() {
+window.gtag = function () {
   dataLayer.push(arguments);
-}
+};
 
-gtag("js", new Date());
-gtag("config", "G-4FKY7GNNYY");
+window.gtag?.("js", new Date());
+window.gtag?.("config", "G-4FKY7GNNYY");
 
 addEventListener("error", (event) => {
-  gtag("event", "exception", {
+  window.gtag?.("event", "exception", {
     description: event.message,
     fatal: true,
   });
 });
 
 addEventListener("unhandledrejection", (event) => {
-  gtag("event", "exception", {
+  window.gtag?.("event", "exception", {
     description: String(event.reason),
     fatal: false,
   });

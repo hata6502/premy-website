@@ -5,6 +5,12 @@ import { FunctionComponent, StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 
+declare global {
+  interface Window {
+    gtag?: Function;
+  }
+}
+
 if ("serviceWorker" in navigator) {
   await navigator.serviceWorker.register("./serviceWorker.js", {
     type: "module",

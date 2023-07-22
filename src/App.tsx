@@ -49,6 +49,7 @@ export const App: FunctionComponent<{
   const isAppInstalled = !matchMedia("(display-mode: browser)").matches;
 
   const handleOpenCanvasButtonClick = () => {
+    window.gtag?.("event", "open");
     setIsPremyDialogOpen(true);
   };
 
