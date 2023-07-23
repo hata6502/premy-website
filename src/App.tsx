@@ -28,7 +28,9 @@ const faqs = [
   },
 ];
 
-let examples: { title: string; image?: string }[] | undefined;
+let examples:
+  | { projectName: string; title: string; image?: string }[]
+  | undefined;
 export const App: FunctionComponent<{
   premyDB?: IDBDatabase;
 }> = ({ premyDB }) => {
@@ -47,8 +49,16 @@ export const App: FunctionComponent<{
       const premy = await premyResponse.json();
 
       examples = [
-        ...hata6502.relatedPages.links1hop,
-        ...premy.relatedPages.links1hop,
+        // @ts-expect-error
+        ...hata6502.relatedPages.links1hop.map((link) => ({
+          ...link,
+          projectName: "hata6502",
+        })),
+        // @ts-expect-error
+        ...premy.relatedPages.links1hop.map((link) => ({
+          ...link,
+          projectName: "premy",
+        })),
       ]
         .sort(() => Math.random() - 0.5)
         .slice(0, 15);
@@ -112,8 +122,8 @@ export const App: FunctionComponent<{
             <span aria-hidden="true"> &rarr;</span>
           </a>
           <div className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
-            {examples.map(({ title, image }) => (
-              <div key={title} className="group relative">
+            {examples.map(({ projectName, title, image }) => (
+              <div key={`${projectName}-${title}`} className="group relative">
                 <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
                   <img
                     src={image}
@@ -122,9 +132,9 @@ export const App: FunctionComponent<{
                   />
 
                   <a
-                    href={`https://scrapbox.io/hata6502/${encodeURIComponent(
-                      title
-                    )}`}
+                    href={`https://scrapbox.io/${encodeURIComponent(
+                      projectName
+                    )}/${encodeURIComponent(title)}`}
                     target="_blank"
                     className="absolute inset-0"
                   />
