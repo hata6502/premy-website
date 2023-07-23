@@ -34,12 +34,22 @@ export const App: FunctionComponent<{
 }> = ({ premyDB }) => {
   if (!examples) {
     throw (async () => {
-      const examplesResponse = await fetch("examples.json");
-      if (!examplesResponse.ok) {
-        throw new Error("Failed to fetch examples.json");
+      const hata6502Response = await fetch("hata6502.json");
+      if (!hata6502Response.ok) {
+        throw new Error("Failed to fetch hata6502.json");
       }
-      const { relatedPages } = await examplesResponse.json();
-      examples = [...relatedPages.links1hop]
+      const hata6502 = await hata6502Response.json();
+
+      const premyResponse = await fetch("premy.json");
+      if (!premyResponse.ok) {
+        throw new Error("Failed to fetch premy.json");
+      }
+      const premy = await premyResponse.json();
+
+      examples = [
+        ...hata6502.relatedPages.links1hop,
+        ...premy.relatedPages.links1hop,
+      ]
         .sort(() => Math.random() - 0.5)
         .slice(0, 15);
     })();
@@ -93,7 +103,15 @@ export const App: FunctionComponent<{
         </div>
 
         <div className="pt-16 sm:pt-24">
-          <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
+          <a
+            href="https://scrapbox.io/premy/"
+            target="_blank"
+            className="text-sm font-medium text-neutral-900 hover:text-neutral-800"
+          >
+            Join Scrapbox
+            <span aria-hidden="true"> &rarr;</span>
+          </a>
+          <div className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
             {examples.map(({ title, image }) => (
               <div key={title} className="group relative">
                 <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
@@ -113,17 +131,6 @@ export const App: FunctionComponent<{
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="flex items-center justify-end">
-            <a
-              href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fpremy.hata6502.com%2F&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Efollow%7Ctwgr%5Epremy_draw&region=follow_link&screen_name=premy_draw"
-              target="_blank"
-              className="text-sm font-medium text-neutral-900 hover:text-neutral-800"
-            >
-              Follow Twitter
-              <span aria-hidden="true"> &rarr;</span>
-            </a>
           </div>
         </div>
 

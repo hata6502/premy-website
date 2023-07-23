@@ -2,9 +2,10 @@ const requests = [
   "./",
   "./dist/index.css",
   "./dist/index.js",
-  "./examples.json",
   "./favicon.png",
+  "./hata6502.json",
   "./manifest.json",
+  "./premy.json",
   "https://fonts.googleapis.com/css?family=Dancing+Script|Fruktur|Hachi+Maru+Pop|Potta+One",
 ];
 
