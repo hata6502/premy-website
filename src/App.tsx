@@ -97,7 +97,7 @@ export const App: FunctionComponent<{
                 target="_blank"
                 className="inline-flex items-center gap-x-2 text-sm font-semibold leading-6 text-gray-900"
               >
-                Install app
+                インストール
                 <ArrowDownTrayIcon className="h-6 w-6" aria-hidden="true" />
               </a>
             )}
@@ -107,7 +107,7 @@ export const App: FunctionComponent<{
               onClick={handleOpenCanvasButtonClick}
               className="rounded-md bg-neutral-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
             >
-              Open canvas
+              お絵かきする
             </button>
           </div>
         </div>
@@ -118,7 +118,7 @@ export const App: FunctionComponent<{
             target="_blank"
             className="text-sm font-medium text-neutral-900 hover:text-neutral-800"
           >
-            Join Scrapbox
+            投稿する
             <span aria-hidden="true"> &rarr;</span>
           </a>
           <div className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
