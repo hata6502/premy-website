@@ -124,6 +124,8 @@ export const App: FunctionComponent<{
           <div className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
             {examples.map(({ projectName, title, image }) => (
               <div key={`${projectName}-${title}`} className="group relative">
+                <span className="text-sm text-gray-700">{title}</span>
+
                 <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
                   <img
                     src={image}
