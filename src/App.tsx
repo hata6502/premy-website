@@ -86,10 +86,6 @@ export const App: FunctionComponent<{
             <img src="favicon.png" className="inline w-24" />
           </h2>
 
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            A drawing app for anyone.
-          </p>
-
           <div className="mt-10 flex items-center gap-x-6">
             {!isAppInstalled && (
               <a
