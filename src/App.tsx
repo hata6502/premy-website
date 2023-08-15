@@ -143,6 +143,16 @@ export const App: FunctionComponent<{
         </div>
 
         <div className="pt-16 sm:pt-24">
+          <button
+            type="button"
+            onClick={handleOpenCanvasButtonClick}
+            className="rounded-md bg-neutral-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+          >
+            お絵かきする
+          </button>
+        </div>
+
+        <div className="py-8">
           <div className="divide-y divide-gray-900/10">
             {faqs.map(({ title, url }) => (
               <a
