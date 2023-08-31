@@ -8,23 +8,23 @@ import { PremyDialog } from "./PremyDialog";
 const faqs = [
   {
     title: "A drawing app for anyone",
-    url: "https://help.hata6502.com/--62645189218beb0020cfe38d",
+    url: "https://scrapbox.io/hata6502/A_drawing_app_for_anyone",
   },
   {
     title: "画面分割でお題を見ながらお絵かきする",
-    url: "https://help.hata6502.com/--63a6d632846866001dede17a",
+    url: "https://scrapbox.io/hata6502/%E7%94%BB%E9%9D%A2%E5%88%86%E5%89%B2%E3%81%A7%E3%81%8A%E9%A1%8C%E3%82%92%E8%A6%8B%E3%81%AA%E3%81%8C%E3%82%89%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%81%99%E3%82%8B",
   },
   {
     title: "お絵かき自己診断",
-    url: "https://help.hata6502.com/--63a6d744e87e17001d2de628",
+    url: "https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E8%87%AA%E5%B7%B1%E8%A8%BA%E6%96%AD",
   },
   {
     title: "premy免責事項",
-    url: "https://help.hata6502.com/--61818b0489e586002278f634",
+    url: "https://scrapbox.io/hata6502/premy%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85",
   },
   {
     title: "お絵かきをScrapboxで公開しよう",
-    url: "https://help.hata6502.com/--63a6d7b54f80c3001d3a6981",
+    url: "https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%82%92Scrapbox%E3%81%A7%E5%85%AC%E9%96%8B%E3%81%97%E3%82%88%E3%81%86",
   },
 ];
 
@@ -89,7 +89,7 @@ export const App: FunctionComponent<{
           <div className="mt-10 flex items-center gap-x-6">
             {!isAppInstalled && (
               <a
-                href="https://help.hata6502.com/--61818b0489e586002278f64c"
+                href="https://scrapbox.io/hata6502/premy%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"
                 target="_blank"
                 className="inline-flex items-center gap-x-2 text-sm font-semibold leading-6 text-gray-900"
               >
