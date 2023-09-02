@@ -1,8 +1,10 @@
 import {
   ArrowDownTrayIcon,
   DocumentTextIcon,
+  PaintBrushIcon,
+  ShareIcon,
 } from "@heroicons/react/24/outline";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, MouseEventHandler, useState } from "react";
 import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
@@ -86,37 +88,15 @@ export const App: FunctionComponent<{
             <img src="favicon.png" className="inline w-24" />
           </h2>
 
-          <div className="mt-10 flex items-center gap-x-6">
-            {!isAppInstalled && (
-              <a
-                href="https://scrapbox.io/hata6502/premy%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"
-                target="_blank"
-                className="inline-flex items-center gap-x-2 text-sm font-semibold leading-6 text-gray-900"
-              >
-                インストール
-                <ArrowDownTrayIcon className="h-6 w-6" aria-hidden="true" />
-              </a>
-            )}
-
-            <button
-              type="button"
-              onClick={handleOpenCanvasButtonClick}
-              className="rounded-md bg-neutral-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
-            >
-              お絵かきする
-            </button>
+          <div className="mt-10">
+            <Actions
+              isAppInstalled={isAppInstalled}
+              onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
+            />
           </div>
         </div>
 
         <div className="pt-16 sm:pt-24">
-          <a
-            href="https://scrapbox.io/premy/"
-            target="_blank"
-            className="text-sm font-medium text-neutral-900 hover:text-neutral-800"
-          >
-            投稿する
-            <span aria-hidden="true"> &rarr;</span>
-          </a>
           <div className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
             {examples.map(({ projectName, title, image }) => (
               <div key={`${projectName}-${title}`} className="group relative">
@@ -143,13 +123,10 @@ export const App: FunctionComponent<{
         </div>
 
         <div className="pt-16 sm:pt-24">
-          <button
-            type="button"
-            onClick={handleOpenCanvasButtonClick}
-            className="rounded-md bg-neutral-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
-          >
-            お絵かきする
-          </button>
+          <Actions
+            isAppInstalled={isAppInstalled}
+            onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
+          />
         </div>
 
         <div className="py-8">
@@ -193,3 +170,39 @@ export const App: FunctionComponent<{
     </>
   );
 };
+
+const Actions: FunctionComponent<{
+  isAppInstalled: boolean;
+  onOpenCanvasButtonClick: MouseEventHandler;
+}> = ({ isAppInstalled, onOpenCanvasButtonClick }) => (
+  <div className="flex flex-wrap items-center gap-6">
+    <button
+      type="button"
+      onClick={onOpenCanvasButtonClick}
+      className="inline-flex items-center gap-x-2 rounded-md bg-neutral-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+    >
+      お絵かきする
+      <PaintBrushIcon className="h-6 w-6" aria-hidden="true" />
+    </button>
+
+    {isAppInstalled ? (
+      <a
+        href="https://scrapbox.io/premy/"
+        target="_blank"
+        className="inline-flex items-center gap-x-2 text-sm font-semibold text-gray-900"
+      >
+        投稿する
+        <ShareIcon className="h-6 w-6" aria-hidden="true" />
+      </a>
+    ) : (
+      <a
+        href="https://scrapbox.io/hata6502/premy%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"
+        target="_blank"
+        className="inline-flex items-center gap-x-2 text-sm font-semibold text-gray-900"
+      >
+        インストール
+        <ArrowDownTrayIcon className="h-6 w-6" aria-hidden="true" />
+      </a>
+    )}
+  </div>
+);
