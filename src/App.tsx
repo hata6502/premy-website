@@ -187,7 +187,7 @@ const Actions: FunctionComponent<{
 
     {isAppInstalled ? (
       <a
-        href="https://scrapbox.io/premy/"
+        href="https://scrapbox.io/premy/%E6%8A%95%E7%A8%BF%E3%81%99%E3%82%8B"
         target="_blank"
         className="inline-flex items-center gap-x-2 text-sm font-semibold text-gray-900"
       >
