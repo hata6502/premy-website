@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: 18
 
-      - run: curl https://scrapbox.io/api/pages/hata6502/premy%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E9%9B%86 -o public/hata6502.json
       - run: curl https://scrapbox.io/api/pages/premy/post -o public/premy.json
       - run: npm ci
       - run: npm run build

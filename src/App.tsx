@@ -38,30 +38,18 @@ export const App: FunctionComponent<{
 }> = ({ premyDB }) => {
   if (!examples) {
     throw (async () => {
-      const hata6502Response = await fetch("hata6502.json");
-      if (!hata6502Response.ok) {
-        throw new Error("Failed to fetch hata6502.json");
-      }
-      const hata6502 = await hata6502Response.json();
-
       const premyResponse = await fetch("premy.json");
       if (!premyResponse.ok) {
         throw new Error("Failed to fetch premy.json");
       }
       const premy = await premyResponse.json();
 
-      examples = [
+      examples = premy.relatedPages.links1hop
         // @ts-expect-error
-        ...hata6502.relatedPages.links1hop.map((link) => ({
-          ...link,
-          projectName: "hata6502",
-        })),
-        // @ts-expect-error
-        ...premy.relatedPages.links1hop.map((link) => ({
+        .map((link) => ({
           ...link,
           projectName: "premy",
-        })),
-      ]
+        }))
         .sort(() => Math.random() - 0.5)
         .slice(0, 15);
     })();
@@ -156,7 +144,7 @@ export const App: FunctionComponent<{
               target="_blank"
               className="hover:text-gray-600"
             >
-              Tomoyuki Hata
+              hata6502
             </a>
           </p>
         </footer>
