@@ -9,24 +9,20 @@ import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
   {
-    title: "A drawing app for anyone",
-    url: "https://scrapbox.io/hata6502/A_drawing_app_for_anyone",
+    title: "お題を見ながらお絵かきする",
+    url: "お題を見ながらお絵かきする https://scrapbox.io/hata6502/%E3%81%8A%E9%A1%8C%E3%82%92%E8%A6%8B%E3%81%AA%E3%81%8C%E3%82%89%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%81%99%E3%82%8B",
   },
   {
-    title: "画面分割でお題を見ながらお絵かきする",
-    url: "https://scrapbox.io/hata6502/%E7%94%BB%E9%9D%A2%E5%88%86%E5%89%B2%E3%81%A7%E3%81%8A%E9%A1%8C%E3%82%92%E8%A6%8B%E3%81%AA%E3%81%8C%E3%82%89%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%81%99%E3%82%8B",
+    title: "ChatGPTでアートセラピー",
+    url: "ChatGPTでアートセラピー https://scrapbox.io/hata6502/ChatGPT%E3%81%A7%E3%82%A2%E3%83%BC%E3%83%88%E3%82%BB%E3%83%A9%E3%83%94%E3%83%BC",
   },
   {
-    title: "お絵かき自己診断",
-    url: "https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E8%87%AA%E5%B7%B1%E8%A8%BA%E6%96%AD",
+    title: "お絵かきをScrapboxで共有しよう",
+    url: "お絵かきをScrapboxで共有しよう https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%82%92Scrapbox%E3%81%A7%E5%85%B1%E6%9C%89%E3%81%97%E3%82%88%E3%81%86",
   },
   {
     title: "premy免責事項",
     url: "https://scrapbox.io/hata6502/premy%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85",
-  },
-  {
-    title: "お絵かきをScrapboxで公開しよう",
-    url: "https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%82%92Scrapbox%E3%81%A7%E5%85%AC%E9%96%8B%E3%81%97%E3%82%88%E3%81%86",
   },
 ];
 
