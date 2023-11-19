@@ -5,6 +5,7 @@ const requests = [
   "./favicon.png",
   "./manifest.json",
   "./premy.json",
+  "./redirect.html",
   "https://fonts.googleapis.com/css?family=Dancing+Script|Fruktur|Hachi+Maru+Pop|Potta+One",
 ];
 
