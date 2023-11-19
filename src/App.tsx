@@ -20,10 +20,6 @@ const faqs = [
     title: "お絵かきをScrapboxで共有しよう",
     url: "https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%82%92Scrapbox%E3%81%A7%E5%85%B1%E6%9C%89%E3%81%97%E3%82%88%E3%81%86",
   },
-  {
-    title: "premy免責事項",
-    url: "https://scrapbox.io/hata6502/premy%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85",
-  },
 ];
 
 let examples:
@@ -133,14 +129,22 @@ export const App: FunctionComponent<{
 
         <footer className="py-8">
           <p className="text-xs leading-5 text-gray-500">
-            {`${new Date().getFullYear()} `}
-
+            {new Date().getFullYear()}
+            &nbsp;
             <a
               href="https://twitter.com/hata6502"
               target="_blank"
               className="hover:text-gray-600"
             >
               hata6502
+            </a>
+            &emsp;
+            <a
+              href="https://scrapbox.io/hata6502/premy%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85"
+              target="_blank"
+              className="hover:text-gray-600"
+            >
+              免責事項
             </a>
           </p>
         </footer>
