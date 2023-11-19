@@ -2,7 +2,7 @@
   "lang": "en-US",
   "name": "premy",
   "short_name": "premy",
-  "start_url": "redirect.html",
+  "start_url": ".",
   "display": "fullscreen",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
