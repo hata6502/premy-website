@@ -10,15 +10,15 @@ import { PremyDialog } from "./PremyDialog";
 const faqs = [
   {
     title: "お題を見ながらお絵かきする",
-    url: "お題を見ながらお絵かきする https://scrapbox.io/hata6502/%E3%81%8A%E9%A1%8C%E3%82%92%E8%A6%8B%E3%81%AA%E3%81%8C%E3%82%89%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%81%99%E3%82%8B",
+    url: "https://scrapbox.io/hata6502/%E3%81%8A%E9%A1%8C%E3%82%92%E8%A6%8B%E3%81%AA%E3%81%8C%E3%82%89%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%81%99%E3%82%8B",
   },
   {
     title: "ChatGPTでアートセラピー",
-    url: "ChatGPTでアートセラピー https://scrapbox.io/hata6502/ChatGPT%E3%81%A7%E3%82%A2%E3%83%BC%E3%83%88%E3%82%BB%E3%83%A9%E3%83%94%E3%83%BC",
+    url: "https://scrapbox.io/hata6502/ChatGPT%E3%81%A7%E3%82%A2%E3%83%BC%E3%83%88%E3%82%BB%E3%83%A9%E3%83%94%E3%83%BC",
   },
   {
     title: "お絵かきをScrapboxで共有しよう",
-    url: "お絵かきをScrapboxで共有しよう https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%82%92Scrapbox%E3%81%A7%E5%85%B1%E6%9C%89%E3%81%97%E3%82%88%E3%81%86",
+    url: "https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%82%92Scrapbox%E3%81%A7%E5%85%B1%E6%9C%89%E3%81%97%E3%82%88%E3%81%86",
   },
   {
     title: "premy免責事項",
