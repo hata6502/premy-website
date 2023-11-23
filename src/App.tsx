@@ -2,7 +2,6 @@ import {
   ArrowDownTrayIcon,
   DocumentTextIcon,
   PaintBrushIcon,
-  ShareIcon,
 } from "@heroicons/react/24/outline";
 import { FunctionComponent, MouseEventHandler, useState } from "react";
 import { PremyDialog } from "./PremyDialog";
@@ -173,16 +172,7 @@ const Actions: FunctionComponent<{
       <PaintBrushIcon className="h-6 w-6" aria-hidden="true" />
     </button>
 
-    {isAppInstalled ? (
-      <a
-        href="https://scrapbox.io/premy/%E6%8A%95%E7%A8%BF%E3%81%99%E3%82%8B"
-        target="_blank"
-        className="inline-flex items-center gap-x-2 text-sm font-semibold text-gray-900"
-      >
-        投稿する
-        <ShareIcon className="h-6 w-6" aria-hidden="true" />
-      </a>
-    ) : (
+    {!isAppInstalled && (
       <a
         href="https://scrapbox.io/hata6502/premy%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"
         target="_blank"
