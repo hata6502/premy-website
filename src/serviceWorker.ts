@@ -35,6 +35,20 @@ serviceWorker.addEventListener("activate", (event) => {
 });
 
 serviceWorker.addEventListener("fetch", (event) => {
+  if (
+    event.request.url === String(new URL("./", location.href)) &&
+    event.request.method === "POST"
+  ) {
+    return event.respondWith(
+      (async () => {
+        const formData = await event.request.formData();
+        const sharedMedia = formData.get("shared");
+        const mediaCache = await caches.open("media");
+        await mediaCache.put("shared", new Response(sharedMedia));
+        return Response.redirect("./", 303);
+      })()
+    );
+  }
   event.respondWith(
     (async () => {
       const cacheResponse = await caches.match(event.request);
