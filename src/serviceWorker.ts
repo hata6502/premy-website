@@ -43,8 +43,17 @@ serviceWorker.addEventListener("fetch", (event) => {
       (async () => {
         const formData = await event.request.formData();
         const sharedMedia = formData.get("shared");
+        if (!(sharedMedia instanceof File)) {
+          throw new Error("shared is not a File");
+        }
+
         const mediaCache = await caches.open("media");
-        await mediaCache.put("shared", new Response(sharedMedia));
+        await mediaCache.put(
+          "shared",
+          new Response(sharedMedia, {
+            headers: { "X-Premy-Name": sharedMedia.name },
+          })
+        );
         return Response.redirect("./", 303);
       })()
     );
