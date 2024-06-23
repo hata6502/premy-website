@@ -59,11 +59,6 @@ export const App: FunctionComponent<{
       tweetContainerElement.append(tweetElement);
     }
   }, []);
-  /*{tweetIDs.map((tweetID) => (
-    <div key={tweetID} className="group relative">
-      tweetID
-    </div>
-  ))}*/
 
   const handleOpenCanvasButtonClick = () => {
     window.gtag?.("event", "open");
