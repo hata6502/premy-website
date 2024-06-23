@@ -3,7 +3,13 @@ import {
   DocumentTextIcon,
   PaintBrushIcon,
 } from "@heroicons/react/24/outline";
-import { FunctionComponent, MouseEventHandler, useState } from "react";
+import {
+  FunctionComponent,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
@@ -15,39 +21,49 @@ const faqs = [
     title: "ChatGPTでアートセラピー",
     url: "https://scrapbox.io/hata6502/ChatGPT%E3%81%A7%E3%82%A2%E3%83%BC%E3%83%88%E3%82%BB%E3%83%A9%E3%83%94%E3%83%BC",
   },
-  {
-    title: "お絵かきをScrapboxで共有しよう",
-    url: "https://scrapbox.io/hata6502/%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%82%92Scrapbox%E3%81%A7%E5%85%B1%E6%9C%89%E3%81%97%E3%82%88%E3%81%86",
-  },
 ];
 
-let examples:
-  | { projectName: string; title: string; image?: string }[]
-  | undefined;
+const tweetIDsURL =
+  "https://script.google.com/macros/s/AKfycbx1Lec0RXfLou1Ixz3-hg6lFHoQdkTDSCFhtYIwQ9_OyWx36f3JYIxGdia9kLdx4DYe/exec";
+
+let tweetIDs: string[] | undefined;
 export const App: FunctionComponent<{
   premyDB?: IDBDatabase;
 }> = ({ premyDB }) => {
-  if (!examples) {
+  if (!tweetIDs) {
     throw (async () => {
-      const premyResponse = await fetch("premy.json");
-      if (!premyResponse.ok) {
-        throw new Error("Failed to fetch premy.json");
+      const tweetIDsResponse = await fetch(tweetIDsURL);
+      if (!tweetIDsResponse.ok) {
+        throw new Error(tweetIDsResponse.statusText);
       }
-      const premy = await premyResponse.json();
-
-      examples = premy.relatedPages.links1hop
-        // @ts-expect-error
-        .map((link) => ({
-          ...link,
-          projectName: "premy",
-        }))
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 15);
+      tweetIDs = await tweetIDsResponse.json();
     })();
   }
 
   const [isPremyDialogOpen, setIsPremyDialogOpen] = useState(false);
   const isAppInstalled = !matchMedia("(display-mode: browser)").matches;
+
+  const tweetContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!tweetContainerRef.current || !tweetIDs) {
+      return;
+    }
+    const tweetContainerElement = tweetContainerRef.current;
+
+    for (const tweetID of tweetIDs) {
+      const tweetElement = document.createElement("div");
+      // @ts-expect-error
+      twttr.widgets.createTweet(tweetID, tweetElement);
+
+      tweetContainerElement.append(tweetElement);
+    }
+  }, []);
+  /*{tweetIDs.map((tweetID) => (
+    <div key={tweetID} className="group relative">
+      tweetID
+    </div>
+  ))}*/
 
   const handleOpenCanvasButtonClick = () => {
     window.gtag?.("event", "open");
@@ -76,29 +92,10 @@ export const App: FunctionComponent<{
         </div>
 
         <div className="pt-16 sm:pt-24">
-          <div className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
-            {examples.map(({ projectName, title, image }) => (
-              <div key={`${projectName}-${title}`} className="group relative">
-                <span className="text-sm text-gray-700">{title}</span>
-
-                <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
-                  <img
-                    src={image}
-                    alt={title}
-                    className="h-full w-full object-contain object-top"
-                  />
-
-                  <a
-                    href={`https://scrapbox.io/${encodeURIComponent(
-                      projectName
-                    )}/${encodeURIComponent(title)}`}
-                    target="_blank"
-                    className="absolute inset-0"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+          <div
+            ref={tweetContainerRef}
+            className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3"
+          />
         </div>
 
         <div className="pt-16 sm:pt-24">
