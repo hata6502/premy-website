@@ -67,14 +67,14 @@ export const App: FunctionComponent<{
           <div className="pt-16 sm:pt-24">
             <Tweets />
           </div>
-        </Suspense>
 
-        <div className="pt-16 sm:pt-24">
-          <Actions
-            isAppInstalled={isAppInstalled}
-            onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
-          />
-        </div>
+          <div className="pt-16 sm:pt-24">
+            <Actions
+              isAppInstalled={isAppInstalled}
+              onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
+            />
+          </div>
+        </Suspense>
 
         <div className="py-8">
           <div className="divide-y divide-gray-900/10">
