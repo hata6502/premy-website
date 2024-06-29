@@ -15,6 +15,10 @@ import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
   {
+    title: "油彩ドット絵メーカー",
+    url: "https://oil-pixel.hata6502.com/",
+  },
+  {
     title: "お題を見ながらお絵かきする",
     url: "https://scrapbox.io/hata6502/%E3%81%8A%E9%A1%8C%E3%82%92%E8%A6%8B%E3%81%AA%E3%81%8C%E3%82%89%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%81%99%E3%82%8B",
   },
