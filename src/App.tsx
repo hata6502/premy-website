@@ -32,11 +32,16 @@ export const App: FunctionComponent<{
 }> = ({ premyDB }) => {
   if (!tweetIDs) {
     throw (async () => {
-      const tweetIDsResponse = await fetch(tweetIDsURL);
-      if (!tweetIDsResponse.ok) {
-        throw new Error(tweetIDsResponse.statusText);
+      try {
+        const tweetIDsResponse = await fetch(tweetIDsURL);
+        if (!tweetIDsResponse.ok) {
+          throw new Error(tweetIDsResponse.statusText);
+        }
+        tweetIDs = await tweetIDsResponse.json();
+      } catch (exception) {
+        console.error(exception);
+        tweetIDs = [];
       }
-      tweetIDs = await tweetIDsResponse.json();
     })();
   }
 
