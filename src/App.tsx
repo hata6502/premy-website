@@ -6,6 +6,7 @@ import {
 import {
   FunctionComponent,
   MouseEventHandler,
+  Suspense,
   useEffect,
   useRef,
   useState,
@@ -26,44 +27,11 @@ const faqs = [
 const tweetIDsURL =
   "https://script.google.com/macros/s/AKfycbx1Lec0RXfLou1Ixz3-hg6lFHoQdkTDSCFhtYIwQ9_OyWx36f3JYIxGdia9kLdx4DYe/exec";
 
-let tweetIDs: string[] | undefined;
 export const App: FunctionComponent<{
   premyDB?: IDBDatabase;
 }> = ({ premyDB }) => {
-  if (!tweetIDs) {
-    throw (async () => {
-      try {
-        const tweetIDsResponse = await fetch(tweetIDsURL);
-        if (!tweetIDsResponse.ok) {
-          throw new Error(tweetIDsResponse.statusText);
-        }
-        tweetIDs = await tweetIDsResponse.json();
-      } catch (exception) {
-        console.error(exception);
-        tweetIDs = [];
-      }
-    })();
-  }
-
   const [isPremyDialogOpen, setIsPremyDialogOpen] = useState(false);
   const isAppInstalled = !matchMedia("(display-mode: browser)").matches;
-
-  const tweetContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!tweetContainerRef.current || !tweetIDs) {
-      return;
-    }
-    const tweetContainerElement = tweetContainerRef.current;
-
-    for (const tweetID of tweetIDs) {
-      const tweetElement = document.createElement("div");
-      // @ts-expect-error
-      twttr.widgets.createTweet(tweetID, tweetElement);
-
-      tweetContainerElement.append(tweetElement);
-    }
-  }, []);
 
   const handleOpenCanvasButtonClick = () => {
     window.gtag?.("event", "open");
@@ -91,12 +59,11 @@ export const App: FunctionComponent<{
           </div>
         </div>
 
-        <div className="pt-16 sm:pt-24">
-          <div
-            ref={tweetContainerRef}
-            className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3"
-          />
-        </div>
+        <Suspense>
+          <div className="pt-16 sm:pt-24">
+            <Tweets />
+          </div>
+        </Suspense>
 
         <div className="pt-16 sm:pt-24">
           <Actions
@@ -181,3 +148,45 @@ const Actions: FunctionComponent<{
     )}
   </div>
 );
+
+let tweetIDs: string[] | undefined;
+const Tweets: FunctionComponent = () => {
+  if (!tweetIDs) {
+    throw (async () => {
+      try {
+        const tweetIDsResponse = await fetch(tweetIDsURL);
+        if (!tweetIDsResponse.ok) {
+          throw new Error(tweetIDsResponse.statusText);
+        }
+        tweetIDs = await tweetIDsResponse.json();
+      } catch (exception) {
+        console.error(exception);
+        tweetIDs = [];
+      }
+    })();
+  }
+
+  const tweetContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!tweetContainerRef.current || !tweetIDs) {
+      return;
+    }
+    const tweetContainerElement = tweetContainerRef.current;
+
+    for (const tweetID of tweetIDs) {
+      const tweetElement = document.createElement("div");
+      // @ts-expect-error
+      twttr.widgets.createTweet(tweetID, tweetElement);
+
+      tweetContainerElement.append(tweetElement);
+    }
+  }, []);
+
+  return (
+    <div
+      ref={tweetContainerRef}
+      className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3"
+    />
+  );
+};
