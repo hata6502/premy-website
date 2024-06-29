@@ -48,7 +48,7 @@ export const App: FunctionComponent<{
 
   return (
     <>
-      <div className="bg-white mx-auto max-w-4xl px-6 lg:px-8">
+      <div className="mx-auto mb-8 px-6 lg:px-8 max-w-4xl bg-white">
         <div className="pt-16 sm:pt-24">
           <h2 className="flex items-center gap-x-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             premy
@@ -94,7 +94,7 @@ export const App: FunctionComponent<{
           </div>
         </div>
 
-        <footer className="py-8">
+        <footer className="pt-8">
           <p className="text-xs leading-5 text-gray-500">
             {new Date().getFullYear()}
             &nbsp;
@@ -190,7 +190,7 @@ const Tweets: FunctionComponent = () => {
   return (
     <div
       ref={tweetContainerRef}
-      className="mt-2 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3"
+      className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3"
     />
   );
 };
