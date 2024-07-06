@@ -1,3 +1,4 @@
+import "./clarity";
 import "./gtag";
 
 import "premy";
