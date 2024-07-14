@@ -6,25 +6,24 @@ import {
 import {
   FunctionComponent,
   MouseEventHandler,
+  RefCallback,
   Suspense,
-  useEffect,
-  useRef,
   useState,
 } from "react";
 import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
   {
+    title: "Fuzzy Tone",
+    url: "https://scrapbox.io/hata6502/Fuzzy_Tone",
+  },
+  {
+    title: "絵文字ラフスケッチ",
+    url: "https://scrapbox.io/hata6502/%E7%B5%B5%E6%96%87%E5%AD%97%E3%83%A9%E3%83%95%E3%82%B9%E3%82%B1%E3%83%83%E3%83%81",
+  },
+  {
     title: "油彩ドット絵メーカー",
     url: "https://oil-pixel.hata6502.com/",
-  },
-  {
-    title: "お題を見ながらお絵かきする",
-    url: "https://scrapbox.io/hata6502/%E3%81%8A%E9%A1%8C%E3%82%92%E8%A6%8B%E3%81%AA%E3%81%8C%E3%82%89%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E3%81%99%E3%82%8B",
-  },
-  {
-    title: "ChatGPTでアートセラピー",
-    url: "https://scrapbox.io/hata6502/ChatGPT%E3%81%A7%E3%82%A2%E3%83%BC%E3%83%88%E3%82%BB%E3%83%A9%E3%83%94%E3%83%BC",
   },
 ];
 
@@ -49,13 +48,15 @@ export const App: FunctionComponent<{
   return (
     <>
       <div className="mx-auto mb-8 px-6 lg:px-8 max-w-4xl bg-white">
-        <div className="pt-16 sm:pt-24">
+        <div className="mt-16">
           <h2 className="flex items-center gap-x-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             premy
             <img src="favicon.png" className="inline w-24" />
           </h2>
 
-          <div className="mt-10">
+          <p className="mt-8">指スマホでもお絵かきできます。</p>
+
+          <div className="mt-8">
             <Actions
               isAppInstalled={isAppInstalled}
               onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
@@ -63,20 +64,7 @@ export const App: FunctionComponent<{
           </div>
         </div>
 
-        <Suspense>
-          <div className="pt-16 sm:pt-24">
-            <Tweets />
-          </div>
-
-          <div className="pt-16 sm:pt-24">
-            <Actions
-              isAppInstalled={isAppInstalled}
-              onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
-            />
-          </div>
-        </Suspense>
-
-        <div className="py-8">
+        <div className="mt-8">
           <div className="divide-y divide-gray-900/10">
             {faqs.map(({ title, url }) => (
               <a
@@ -94,7 +82,20 @@ export const App: FunctionComponent<{
           </div>
         </div>
 
-        <footer className="pt-8">
+        <Suspense>
+          <div className="mt-8">
+            <Tweets />
+          </div>
+
+          <div className="mt-16">
+            <Actions
+              isAppInstalled={isAppInstalled}
+              onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
+            />
+          </div>
+        </Suspense>
+
+        <footer className="mt-16">
           <p className="text-xs leading-5 text-gray-500">
             {new Date().getFullYear()}
             &nbsp;
@@ -103,7 +104,7 @@ export const App: FunctionComponent<{
               target="_blank"
               className="hover:text-gray-600"
             >
-              hata6502
+              ムギュウ
             </a>
             &emsp;
             <a
@@ -170,26 +171,23 @@ const Tweets: FunctionComponent = () => {
     })();
   }
 
-  const tweetContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!tweetContainerRef.current || !tweetIDs) {
+  const refCallback: RefCallback<HTMLDivElement> = (ref) => {
+    if (!ref || !tweetIDs) {
       return;
     }
-    const tweetContainerElement = tweetContainerRef.current;
 
     for (const tweetID of tweetIDs) {
       const tweetElement = document.createElement("div");
       // @ts-expect-error
       twttr.widgets.createTweet(tweetID, tweetElement);
 
-      tweetContainerElement.append(tweetElement);
+      ref.append(tweetElement);
     }
-  }, []);
+  };
 
   return (
     <div
-      ref={tweetContainerRef}
+      ref={refCallback}
       className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3"
     />
   );
