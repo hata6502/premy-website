@@ -18,10 +18,6 @@ const faqs = [
     url: "https://scrapbox.io/hata6502/Fuzzy_Tone",
   },
   {
-    title: "絵文字ラフスケッチ",
-    url: "https://scrapbox.io/hata6502/%E7%B5%B5%E6%96%87%E5%AD%97%E3%83%A9%E3%83%95%E3%82%B9%E3%82%B1%E3%83%83%E3%83%81",
-  },
-  {
     title: "油彩ドット絵メーカー",
     url: "https://oil-pixel.hata6502.com/",
   },
