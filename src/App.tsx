@@ -14,8 +14,8 @@ import { PremyDialog } from "./PremyDialog";
 
 const faqs = [
   {
-    title: "Fuzzy Tone",
-    url: "https://scrapbox.io/hata6502/Fuzzy_Tone",
+    title: "コミュニティサイト",
+    url: "https://scrapbox.io/premy/",
   },
   {
     title: "絵文字ラフスケッチ",
