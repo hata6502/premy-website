@@ -143,7 +143,7 @@ const Actions: FunctionComponent<{
 
     {!isAppInstalled && (
       <a
-        href="https://scrapbox.io/hata6502/premy%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"
+        href="https://scrapbox.io/premy/premy%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"
         target="_blank"
         className="inline-flex items-center gap-x-2 text-sm font-semibold text-gray-900"
       >
