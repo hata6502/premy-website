@@ -108,11 +108,11 @@ export const App: FunctionComponent<{
             </a>
             &emsp;
             <a
-              href="https://scrapbox.io/hata6502/premy%E5%85%8D%E8%B2%AC%E4%BA%8B%E9%A0%85"
+              href="https://kiyac.app/privacypolicy/DyJAghMFYlyPRtyxTB1X"
               target="_blank"
               className="hover:text-gray-600"
             >
-              免責事項
+              プライバシーポリシー
             </a>
           </p>
         </footer>
