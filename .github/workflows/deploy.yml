@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: 0 0 * * *
 permissions:
   pages: write
   id-token: write
@@ -19,6 +21,7 @@ jobs:
         with:
           node-version: 20
 
+      - run: curl "https://scrapbox.io/api/pages/hata6502/premy%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E9%9B%86" -o public/cosense.json
       - run: npm ci
       - run: npm run build
 
