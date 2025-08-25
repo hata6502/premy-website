@@ -30,7 +30,7 @@ export const App: FunctionComponent<{
   premyDB?: IDBDatabase;
 }> = ({ premyDB }) => {
   const [isPremyDialogOpen, setIsPremyDialogOpen] = useState(false);
-  const isAppInstalled = !matchMedia("(display-mode: browser)").matches;
+  const appInstalled = !matchMedia("(display-mode: browser)").matches;
 
   const handleOpenCanvasButtonClick = () => {
     window.gtag?.("event", "open");
@@ -54,7 +54,7 @@ export const App: FunctionComponent<{
 
           <div className="mt-8">
             <Actions
-              isAppInstalled={isAppInstalled}
+              appInstalled={appInstalled}
               onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
             />
           </div>
@@ -85,7 +85,7 @@ export const App: FunctionComponent<{
 
           <div className="mt-16">
             <Actions
-              isAppInstalled={isAppInstalled}
+              appInstalled={appInstalled}
               onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
             />
           </div>
@@ -120,7 +120,7 @@ export const App: FunctionComponent<{
 
           <div className="mt-16">
             <Actions
-              isAppInstalled={isAppInstalled}
+              appInstalled={appInstalled}
               onOpenCanvasButtonClick={handleOpenCanvasButtonClick}
             />
           </div>
@@ -137,9 +137,9 @@ export const App: FunctionComponent<{
 };
 
 const Actions: FunctionComponent<{
-  isAppInstalled: boolean;
+  appInstalled: boolean;
   onOpenCanvasButtonClick: MouseEventHandler;
-}> = ({ isAppInstalled, onOpenCanvasButtonClick }) => (
+}> = ({ appInstalled, onOpenCanvasButtonClick }) => (
   <div className="flex flex-wrap items-center gap-6">
     <button
       type="button"
@@ -150,13 +150,18 @@ const Actions: FunctionComponent<{
       <PaintBrushIcon className="h-6 w-6" aria-hidden="true" />
     </button>
 
-    {!isAppInstalled && (
+    {!appInstalled && (
       <a
-        href="https://scrapbox.io/hata6502/premy%E3%82%A2%E3%83%97%E3%83%AA%E3%82%92%E3%82%B9%E3%83%9E%E3%83%9B%E3%81%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B"
+        href={
+          navigator.platform.toLowerCase().includes("android") ||
+          navigator.platform.toLowerCase().includes("linux")
+            ? "https://play.google.com/store/apps/details?id=com.hata6502.premy.twa"
+            : "https://help.hata6502.com/--68aaf7d968a35c1d8d130b71"
+        }
         target="_blank"
         className="inline-flex items-center gap-x-2 text-sm font-semibold text-gray-900"
       >
-        インストール
+        アプリ版をインストール
         <ArrowDownTrayIcon className="h-6 w-6" aria-hidden="true" />
       </a>
     )}
