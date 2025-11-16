@@ -155,7 +155,8 @@ const Actions: FunctionComponent<{
         href={
           navigator.platform.toLowerCase().includes("android") ||
           navigator.platform.toLowerCase().includes("linux")
-            ? "https://play.google.com/store/apps/details?id=com.hata6502.premy.twa"
+            ? // "https://play.google.com/store/apps/details?id=com.hata6502.premy.twa"
+              "https://help.hata6502.com/--68aaf7d968a35c1d8d130b71"
             : "https://help.hata6502.com/--68aaf7d968a35c1d8d130b71"
         }
         target="_blank"
