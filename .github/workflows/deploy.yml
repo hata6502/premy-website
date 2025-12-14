@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: lts/*
 
       - run: curl "https://scrapbox.io/api/pages/hata6502/premy%E3%81%8A%E7%B5%B5%E3%81%8B%E3%81%8D%E9%9B%86" -o public/cosense.json
       - run: npm ci
