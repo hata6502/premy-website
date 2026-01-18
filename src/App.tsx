@@ -18,8 +18,8 @@ const faqs = [
     url: "https://oil-pixel.hata6502.com/",
   },
   {
-    title: "写真地図",
-    url: "https://almap.hata6502.com/",
+    title: "Emojigram",
+    url: "https://emojigram.hata6502.com/",
   },
 ];
 
