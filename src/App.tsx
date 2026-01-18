@@ -196,9 +196,12 @@ const Tweets: FunctionComponent = () => {
       ref.append(tweetElement);
 
       try {
-        // https://developer.x.com/en/docs/x-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
-        // @ts-expect-error
-        await twttr.widgets.createTweet(tweetID, tweetElement);
+        await Promise.race([
+          // https://developer.x.com/en/docs/x-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
+          // @ts-expect-error
+          twttr.widgets.createTweet(tweetID, tweetElement),
+          new Promise((_resolve, reject) => setTimeout(reject, 3000)),
+        ]);
       } catch (exception) {
         console.error(exception);
       }
@@ -229,7 +232,7 @@ const Cosenses: FunctionComponent = () => {
         cosenses = shuffled(
           cosense.relatedPages.links1hop
             // @ts-expect-error
-            .map((link) => ({ ...link, projectName: "hata6502" }))
+            .map((link) => ({ ...link, projectName: "hata6502" })),
         );
       } catch (exception) {
         console.error(exception);
@@ -253,7 +256,7 @@ const Cosenses: FunctionComponent = () => {
 
             <a
               href={`https://scrapbox.io/${encodeURIComponent(
-                projectName
+                projectName,
               )}/${encodeURIComponent(title)}`}
               target="_blank"
               className="absolute inset-0"
