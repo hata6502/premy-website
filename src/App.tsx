@@ -186,7 +186,7 @@ const Tweets: FunctionComponent = () => {
     })();
   }
 
-  const refCallback: RefCallback<HTMLDivElement> = (ref) => {
+  const refCallback: RefCallback<HTMLDivElement> = async (ref) => {
     if (!ref || !tweetIDs) {
       return;
     }
@@ -195,8 +195,9 @@ const Tweets: FunctionComponent = () => {
       const tweetElement = document.createElement("div");
       // @ts-expect-error
       twttr.widgets.createTweet(tweetID, tweetElement);
-
       ref.append(tweetElement);
+
+      await new Promise((resolve) => setTimeout(resolve, 200));
     }
   };
 
