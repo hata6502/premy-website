@@ -193,11 +193,10 @@ const Tweets: FunctionComponent = () => {
 
     for (const tweetID of tweetIDs) {
       const tweetElement = document.createElement("div");
-      // @ts-expect-error
-      twttr.widgets.createTweet(tweetID, tweetElement);
       ref.append(tweetElement);
-
-      await new Promise((resolve) => setTimeout(resolve, 200));
+      // https://developer.x.com/en/docs/x-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
+      // @ts-expect-error
+      await twttr.widgets.createTweet(tweetID, tweetElement);
     }
   };
 
