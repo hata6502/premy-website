@@ -50,7 +50,7 @@ export const App: FunctionComponent<{
             <img src="favicon.png" className="inline w-24" />
           </h2>
 
-          <p className="mt-8">指スマホでもお絵かきできます。</p>
+          <p className="mt-8">プライベートお絵かきチャット</p>
 
           <div className="mt-8">
             <Actions
