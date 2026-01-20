@@ -91,28 +91,6 @@ export const App: FunctionComponent<{
           </div>
         </Suspense>
 
-        <footer className="mt-16">
-          <p className="text-xs leading-5 text-gray-500">
-            {new Date().getFullYear()}
-            &nbsp;
-            <a
-              href="https://twitter.com/hata6502"
-              target="_blank"
-              className="hover:text-gray-600"
-            >
-              ムギュウ
-            </a>
-            &emsp;
-            <a
-              href="https://kiyac.app/privacypolicy/DyJAghMFYlyPRtyxTB1X"
-              target="_blank"
-              className="hover:text-gray-600"
-            >
-              プライバシーポリシー
-            </a>
-          </p>
-        </footer>
-
         <Suspense>
           <div className="mt-32">
             <Cosenses />
@@ -125,6 +103,49 @@ export const App: FunctionComponent<{
             />
           </div>
         </Suspense>
+
+        <footer className="mt-16">
+          <p className="text-xs leading-5 text-gray-500">
+            {new Date().getFullYear()}{" "}
+            <a
+              href="https://twitter.com/hata6502"
+              target="_blank"
+              className="underline hover:text-gray-600"
+            >
+              ムギュウ
+            </a>
+          </p>
+
+          <p className="text-xs leading-5 text-gray-500">
+            <a
+              href="https://kiyac.app/privacypolicy/DyJAghMFYlyPRtyxTB1X"
+              target="_blank"
+              className="underline hover:text-gray-600"
+            >
+              プライバシーポリシー
+            </a>
+          </p>
+
+          <p className="text-xs leading-5 text-gray-500">
+            This site is protected by reCAPTCHA and the Google{" "}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              className="underline hover:text-gray-600"
+            >
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://policies.google.com/terms"
+              target="_blank"
+              className="underline hover:text-gray-600"
+            >
+              Terms of Service
+            </a>{" "}
+            apply.
+          </p>
+        </footer>
       </div>
 
       <PremyDialog
