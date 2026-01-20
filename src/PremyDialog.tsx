@@ -132,7 +132,7 @@ AIサーバーに情報を送信・保持します
       <premy-dialog ref={ref} />
 
       {open && (
-        <div className="premy-pointer-listener-ignore fixed right-2 bottom-2 z-[1310] flex flex-col items-end gap-4">
+        <div className="premy-pointer-listener-ignore fixed right-2 bottom-2 z-[1310] flex flex-col items-end gap-2">
           {chatOpen && <Chat sendCanvas={sendCanvas} />}
 
           {chatOpen ? (
