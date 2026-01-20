@@ -73,7 +73,7 @@ export const Chat: FunctionComponent<{ sendCanvas: string }> = ({
     <ChatKit
       ref={ref}
       control={control}
-      style={{ width: 360, height: 520 }}
+      style={{ width: 360, height: 540 }}
       {...{
         class: "rounded-lg bg-white shadow-lg outline-1 outline-black/5",
       }}
