@@ -3,9 +3,12 @@ import type { FunctionComponent } from "react";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import type { OpenAIChatKit } from "@openai/chatkit-react";
 
-export const Chat: FunctionComponent<{ sendCanvas: string }> = ({
+export const Chat: FunctionComponent<{ open: boolean; sendCanvas: string }> = ({
+  open,
   sendCanvas,
 }) => {
+  const userID = localStorage.getItem("chat-user-id");
+
   const ref = useRef<OpenAIChatKit>(null);
 
   useEffect(() => {
@@ -35,6 +38,10 @@ export const Chat: FunctionComponent<{ sendCanvas: string }> = ({
   const { control } = useChatKit({
     api: {
       getClientSecret: async () => {
+        if (!userID) {
+          throw new Error("Missing chat-user-id in localStorage");
+        }
+
         await new Promise<void>((resolve) =>
           grecaptcha.enterprise.ready(resolve),
         );
@@ -42,11 +49,6 @@ export const Chat: FunctionComponent<{ sendCanvas: string }> = ({
           "6LdOhk8sAAAAAMEeUuIG4SXY6k1NYjhtQatCb0CU",
           { action: "GET_CLIENT_SECRET" },
         );
-
-        const userID = localStorage.getItem("chat-user-id");
-        if (!userID) {
-          throw new Error("Missing chat-user-id in localStorage");
-        }
 
         const response = await fetch(
           "https://chatkit-session-911313130364.asia-northeast1.run.app/",
@@ -69,11 +71,15 @@ export const Chat: FunctionComponent<{ sendCanvas: string }> = ({
     composer: { attachments: { enabled: true } },
   });
 
+  if (!userID) {
+    return null;
+  }
+
   return (
     <ChatKit
       ref={ref}
       control={control}
-      style={{ width: 360, height: 540 }}
+      style={{ display: open ? "block" : "none", width: 360, height: 540 }}
       {...{
         class: "rounded-lg bg-white shadow-lg outline-1 outline-black/5",
       }}
