@@ -52,6 +52,10 @@ export const App: FunctionComponent<{
 
           <p className="mt-8">プライベートお絵かきチャット</p>
 
+          <p className="mt-2 text-sm text-gray-600">
+            お絵かきしながらAIとチャットしたり、AIもお絵かきできます
+          </p>
+
           <div className="mt-8">
             <Actions
               appInstalled={appInstalled}
