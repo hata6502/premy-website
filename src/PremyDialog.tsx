@@ -147,7 +147,7 @@ AIサーバーに情報を送信・保持します
             <button
               type="button"
               onClick={handleOpenChatButtonClick}
-              className="rounded-full bg-neutral-900 p-3 text-white shadow-xs hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-800"
+              className="rounded-full bg-pink-500 p-3 text-white shadow-xs hover:bg-pink-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-500"
             >
               <ChatBubbleLeftRightIcon aria-hidden="true" className="w-7 h-7" />
             </button>
