@@ -241,9 +241,7 @@ const Tweets: FunctionComponent = () => {
   );
 };
 
-let cosenses:
-  | { projectName: string; title: string; image?: string }[]
-  | undefined;
+let cosenses: { title: string; image?: string }[] | undefined;
 const Cosenses: FunctionComponent = () => {
   if (!cosenses) {
     throw (async () => {
@@ -255,9 +253,7 @@ const Cosenses: FunctionComponent = () => {
         const cosense = await cosenseResponse.json();
 
         cosenses = shuffled(
-          cosense.relatedPages.links1hop
-            // @ts-expect-error
-            .map((link) => ({ ...link, projectName: "hata6502" })),
+          cosense.relatedPages.links1hop,
         );
       } catch (exception) {
         console.error(exception);
@@ -268,23 +264,15 @@ const Cosenses: FunctionComponent = () => {
 
   return (
     <div className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-3">
-      {cosenses.map(({ projectName, title, image }) => (
-        <div key={`${projectName}-${title}`} className="group relative">
+      {cosenses.map(({ title, image }) => (
+        <div key={title}>
           <span className="text-sm text-gray-700">{title}</span>
 
-          <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
+          <div className="h-56 w-full overflow-hidden rounded-md lg:h-72 xl:h-80">
             <img
               src={image}
               alt={title}
               className="h-full w-full object-contain object-top"
-            />
-
-            <a
-              href={`https://scrapbox.io/${encodeURIComponent(
-                projectName,
-              )}/${encodeURIComponent(title)}`}
-              target="_blank"
-              className="absolute inset-0"
             />
           </div>
         </div>
