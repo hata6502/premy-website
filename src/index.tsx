@@ -13,9 +13,30 @@ declare global {
 }
 
 if ("serviceWorker" in navigator) {
-  await navigator.serviceWorker.register("./serviceWorker.js", {
-    type: "module",
-  });
+  try {
+    const registration = await navigator.serviceWorker.register(
+      "./serviceWorker.js",
+      {
+        type: "module",
+      }
+    );
+
+    registration.onupdatefound = () => {
+      const installing = registration.installing;
+      if (installing) {
+        installing.onstatechange = () => {
+          if (
+            installing.state === "activated" &&
+            navigator.serviceWorker.controller
+          ) {
+            location.reload();
+          }
+        };
+      }
+    };
+  } catch (exception) {
+    console.error(exception);
+  }
 }
 
 const Index: FunctionComponent = () => {

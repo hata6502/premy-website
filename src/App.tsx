@@ -6,8 +6,9 @@ import {
 import {
   FunctionComponent,
   MouseEventHandler,
-  RefCallback,
   Suspense,
+  useEffect,
+  useRef,
   useState,
 } from "react";
 import { PremyDialog } from "./PremyDialog";
@@ -211,33 +212,45 @@ const Tweets: FunctionComponent = () => {
     })();
   }
 
-  const refCallback: RefCallback<HTMLDivElement> = async (ref) => {
-    if (!ref || !tweetIDs) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const current = ref.current;
+    if (!current || !tweetIDs) {
       return;
     }
 
-    for (const tweetID of tweetIDs) {
-      const tweetElement = document.createElement("div");
-      ref.append(tweetElement);
+    current.replaceChildren();
 
-      try {
-        await Promise.race([
-          // https://developer.x.com/en/docs/x-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
-          // @ts-expect-error
-          twttr.widgets.createTweet(tweetID, tweetElement),
-          new Promise((_resolve, reject) => setTimeout(reject, 3000)),
-        ]);
-      } catch (exception) {
-        console.error(exception);
+    const abortController = new AbortController();
+    (async () => {
+      for (const tweetID of tweetIDs) {
+        try {
+          if (abortController.signal.aborted) {
+            throw abortController.signal.reason;
+          }
+          const tweetElement = document.createElement("div");
+          current.append(tweetElement);
+
+          await Promise.race([
+            // https://developer.x.com/en/docs/x-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
+            // @ts-expect-error
+            twttr.widgets.createTweet(tweetID, tweetElement),
+            new Promise((_resolve, reject) => setTimeout(reject, 3000)),
+          ]);
+        } catch (exception) {
+          console.error(exception);
+        }
       }
-    }
-  };
+    })();
+
+    return () => {
+      abortController.abort();
+    };
+  }, []);
 
   return (
-    <div
-      ref={refCallback}
-      className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3"
-    />
+    <div ref={ref} className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3" />
   );
 };
 
