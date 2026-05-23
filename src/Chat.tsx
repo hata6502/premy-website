@@ -68,7 +68,18 @@ export const Chat: FunctionComponent<{ open: boolean; sendCanvas: string }> = ({
         return clientSecret;
       },
     },
-    composer: { attachments: { enabled: true } },
+    composer: {
+      attachments: { enabled: true },
+      tools: [
+        {
+          id: "image_generation",
+          label: "お絵かき",
+          icon: "images",
+          placeholderOverride: "描いてほしい絵を入力",
+          pinned: true,
+        },
+      ],
+    },
   });
 
   if (!userID) {
