@@ -69,6 +69,13 @@ export const Chat: FunctionComponent<{ open: boolean; sendCanvas: string }> = ({
       },
     },
     composer: { attachments: { enabled: true } },
+    startScreen: {
+      prompts: [
+        "これはなんの絵でしょう?",
+        "キャンバスを広げたい",
+        "仕上げて",
+      ].map((prompt) => ({ label: prompt, prompt })),
+    },
   });
 
   if (!userID) {
